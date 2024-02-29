@@ -1,3 +1,7 @@
+#
+# https://www.codificandobits.com/blog/tutorial-prediccion-de-acciones-en-la-bolsa-redes-lstm/ 
+#
+
 import numpy as np
 np.random.seed(4)
 import matplotlib.pyplot as plt
