@@ -11,10 +11,13 @@ from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
 
+import os
+
 #
 # Funciones auxiliares
 #
 def graficar_predicciones(real, prediccion):
+    plt.figure()
     plt.plot(real[0:len(prediccion)],color='red', label='Valor real de la acción')
     plt.plot(prediccion, color='blue', label='Predicción de la acción')
     plt.ylim(1.1 * np.min(prediccion)/2, 1.1 * np.max(prediccion))
@@ -26,8 +29,10 @@ def graficar_predicciones(real, prediccion):
 #
 # Lectura de los datos
 #
+file_path = os.path.abspath('archivo.csv')
 
-dataset = pd.read_csv('C:\Users\\jorge\\Documents\\GitHub\\ejerciciospy\\ejercicios_con_py\\archivo.csv', index_col='Date', parse_dates=['Date'])
+dataset = pd.read_csv('ejercicios_con_py/archivo.csv', index_col='Date', parse_dates=['Date'])
+
 dataset.head()
 
 #
@@ -35,6 +40,7 @@ dataset.head()
 # La LSTM se entrenará con datos de 2016 hacia atrás. La validación se hará con datos de 2017 en adelante.
 # En ambos casos sólo se usará el valor más alto de la acción para cada día
 #
+plt.figure()
 set_entrenamiento = dataset[:'2016'].iloc[:,1:2]
 set_validacion = dataset['2017':].iloc[:,1:2]
 
