@@ -106,8 +106,9 @@ x_train = x_train.reshape(-1, 1, 1)
 
 # Definir el modelo con una capa LSTM
 model = tf.keras.Sequential([
-    tf.keras.layers.LSTM(units=30, activation='relu', input_shape=(1, 1)),
-    
+   # esto anda 1 #tf.keras.layers.LSTM(units=30, activation='relu', input_shape=(1, 1)),
+    tf.keras.layers.LSTM(units=30, activation='relu', input_shape=(1, 1), return_sequences=True),
+    tf.keras.layers.LSTM(units=20, activation='relu', input_shape=(1, 1)),
     
     tf.keras.layers.Dense(units=1)  # Capa de salida sin función de activación para regresión
 ])
@@ -119,7 +120,7 @@ model.compile(optimizer='adam', loss='mean_squared_error')
 model.fit(x_train, y_train, epochs=2000, verbose=0)
 
 # Generar datos para hacer predicciones
-x_test = np.linspace(0, 5, 100).reshape(-1, 1, 1)
+x_test = np.linspace(0, 15, 100).reshape(-1, 1, 1)
 y_pred = model.predict(x_test)
 
 # Deshacer el reshape para visualización
